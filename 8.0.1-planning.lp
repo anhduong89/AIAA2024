@@ -1,5 +1,5 @@
-
-avai(D, V, 0) :- init_loc(D, V).
+time(timeConstant).
+avai(D, V, 0) :- init_loc(D, V), time(0).
 
 
 % #program plan(T).
@@ -8,6 +8,10 @@ avai(D, V, 0) :- init_loc(D, V).
 
 % each drone can be assigned once at each time step.
 :- as(D, N1, T), as(D, N2, T), N1 != N2, time(T).
+
+% a request can only be assigned once
+:- as(D1, N, T), as(D2, N, T), D1 != D2.
+:- as(_, N, T1), as(_, N, T2), T1 != T2.
 
 % if number requests > number avai drone: all avai drone must be assigned
 :- C1 = #count{N:request(N, _, _, _, T), time(T)}, C2=#count{D:avai(D, _, T), time(T)}, C3 = #count{N: as(_, N, T), time(T)}, time(T), C1 > C2, C3 != C2.
@@ -36,11 +40,19 @@ iteration_cost(TC, T) :- TC = #sum {C, N: cost(N, C, T), time(T)}, time(T).
 %--------- auxiliary
 incomplete_request(N, T+1) :- request(N, V, V', W, T), not as(_, N, _), time(T).
 
-request(N,V, V', W, T) :- new_request(N, T), request(N, V, V', W, _), time(T).
+% request(N,V, V', W, T) :- new_request(N, T), request(N, V, V', W, _), time(T).
 
-complete :- C = #count {D, N: as(D, N, _)}, total_request(TR), C = TR.
+complete :- C = #count {N: as(_, N, _)}, total_request(TR), C = TR.
 
-#show as(D, N, T): as(D, N, T), time(T).
+% total_cost(TC) :- TC = #sum {C, T: iteration_cost(C, T)}.
+
+#show.
+#show as(D, N, T): as(D, N, T).
+#show request(N, V, V', W, T+1): incomplete_request(N, T+1), request(N, V, V', W, T).
+% #show avai(D, V, T): avai(D, V, T), time(T'), T > T'.
+#show avai/3.
+#show complete/0.
+#show iteration_cost/2.
 % #show cost/3.
 % #show iteration_cost/2.
 % #show incomplete_request/2.

@@ -24,3 +24,4 @@ operation_cost(1, 1, 0).
 operation_cost(2, 2, 0).
 operation_cost(3, 3, 0).
 operation_cost(4, 4, 0).
+
