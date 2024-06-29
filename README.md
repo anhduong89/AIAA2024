@@ -3,13 +3,21 @@
 - python
 ## content
 gen_init.py             : generate random initial location of agent
+
 gen_rq.py               : generate trip request (random origin and destination)
+
 init.lp                 : initial location instance
+
 network.lp              : network instance (vertiport, arc)
+
 rq.lp                   : request instance
+
 solver_all.sh           : reproduce all experiments
+
 8.0.1-planning.lp       : single-step planning program (pi)
+
 8.0.1-planning.py       : iterative caller(Algorithm 1)
+
 timeSchedule.lp         : time schedule program (pi_dl)
 ## hyper-parameter
 
