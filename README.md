@@ -12,11 +12,11 @@ solver_all.sh           : reproduce all experiments
 8.0.1-planning.py       : iterative caller(Algorithm 1)  
 timeSchedule.lp         : time schedule program (pi_dl)  
 ## hyper-parameter
-8.0.1-planning.py:  
-                    nb_drone : number of drone  
-                    nb_request: number of request  
-                    run_for_request: how many times you want to sampling the request  
-                    run_for_drone: how many times you want to sampling the initial location of agent  
+**8.0.1-planning.py**     
+nb_drone : number of drone  
+nb_request: number of request  
+run_for_request: how many times you want to sampling the request  
+run_for_drone: how many times you want to sampling the initial location of agent
 
 ## usage
 TO reproduce all experiments:  
